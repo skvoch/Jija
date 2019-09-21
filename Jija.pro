@@ -7,7 +7,8 @@ SOURCES += \
         src/main.cpp \
     src/core/ecs/Entity.cpp \
     src/core/ecs/ComponentManager.cpp \
-    src/core/ecs/Components/InputComponent.cpp
+    src/core/ecs/Components/InputComponent.cpp \
+    src/core/ecs/IComponent.cpp
 
 HEADERS += \
     src/core/ecs/Entity.h \

@@ -22,6 +22,7 @@ public:
         const auto typeID = ComponentManager::getInstance()->getType<Type>();
 
         if(!m_components.count(typeID)) {
+            component->registerInManager(typeID, m_id);
             m_components.insert({typeID, std::move(component)});
             return true;
         } else {
@@ -32,10 +33,10 @@ public:
 
     template<typename T>
     std::shared_ptr<T> getComponent() {
-        const auto type = ComponentManager::getInstance()->getType<T>();
+        const auto typeID = ComponentManager::getInstance()->getType<T>();
 
-        if(m_components.count(type)) {
-            return std::static_pointer_cast<T>(m_components[type]);
+        if(m_components.count(typeID)) {
+            return std::static_pointer_cast<T>(m_components[typeID]);
         } else {
             std::cerr << "Entity::error - component not exist (" << typeid(T).name() << std::endl;
             return nullptr;

@@ -3,8 +3,10 @@
 
 #include "IComponent.h"
 
-#include <typeinfo>
+#include <unordered_map>
 #include <iostream>
+#include <typeinfo>
+#include <vector>
 #include <string>
 
 #include "Components/InputComponent.h"
@@ -19,11 +21,18 @@ public:
         throw std::logic_error("Partial specialization for ComponentManager::getType<T> not exist");
     }
 
+    template<typename T>
+    std::vector<std::size_t> getEntitesIDs() {
+        return m_registerTable[getType<T>()];
+    }
+
+    void register_component(const IComponent::Type type, const std::size_t entityID);
 private:
     ComponentManager() = default;
     ComponentManager(const ComponentManager&) = delete;
     ComponentManager& operator=( const ComponentManager&) = delete;
-    std::string name;
+
+    std::unordered_map<InputComponent::Type, std::vector<std::size_t>> m_registerTable;
 };
 
 

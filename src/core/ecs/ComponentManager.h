@@ -7,26 +7,26 @@
 #include <iostream>
 #include <string>
 
+#include "Components/InputComponent.h"
+
 class ComponentManager
 {
 public:
-    static ComponentManager* getInstance()
-    {
-        static auto instance = new ComponentManager;
-        return instance;
-    }
+    static ComponentManager* getInstance();
 
     template<typename T>
     IComponent::Type getType() {
-        std::cerr << "not found Componentmanager::getType<T>" << std::endl;
-        return 0;
+        throw std::logic_error("Partial specialization for ComponentManager::getType<T> not exist");
     }
 
 private:
-    ComponentManager();
+    ComponentManager() = default;
     ComponentManager(const ComponentManager&) = delete;
     ComponentManager& operator=( const ComponentManager&) = delete;
+    std::string name;
 };
+
+
 
 
 #endif // COMPONENTMANAGER_H

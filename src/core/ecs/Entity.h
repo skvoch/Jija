@@ -16,11 +16,13 @@ public:
 
     template<typename T>
     bool addComponent(const T&&component) {
-        auto instance = ComponentManager::getInstance();
-        const auto type = instance->getType<T>();
+        using PointerType = decltype(component.get());
+        using Type = typename std::remove_pointer<PointerType>::type;
 
-        if(m_components.find(type) == m_components.end()) {
-            m_components.insert({type, std::move(component)});
+        const auto typeID = ComponentManager::getInstance()->getType<Type>();
+
+        if(!m_components.count(typeID)) {
+            m_components.insert({typeID, std::move(component)});
             return true;
         } else {
             std::cerr << "Entity::error - component already exist (" << typeid(component).name() << std::endl;
@@ -32,7 +34,7 @@ public:
     std::shared_ptr<T> getComponent() {
         const auto type = ComponentManager::getInstance()->getType<T>();
 
-        if(m_components.find(type) == m_components.end()) {
+        if(m_components.count(type)) {
             return std::static_pointer_cast<T>(m_components[type]);
         } else {
             std::cerr << "Entity::error - component not exist (" << typeid(T).name() << std::endl;

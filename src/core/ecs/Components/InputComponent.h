@@ -6,7 +6,7 @@
 class InputComponent : public IComponent
 {
 public:
-    int key = 0;
+    int key = 228;
 };
 
 #endif // INPUTCOMPONENT_H

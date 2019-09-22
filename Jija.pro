@@ -5,7 +5,12 @@ CONFIG -= qt
 
 LIBS += -lpthread \
        -lboost_system \
-       -lboost_program_options
+       -lboost_program_options \
+       -lX11 \
+       -lGL \
+       -lGLU \
+       -lglut \
+       -lgainput
 
 SOURCES += \
         src/main.cpp \

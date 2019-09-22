@@ -1,4 +1,5 @@
 #include "SystemManager.h"
+#include "Systems/InputSystem.h"
 
 SystemManager::SystemManager()
     : m_stop(false)
@@ -16,7 +17,10 @@ SystemManager::SystemManager()
 
 
                 (void)typeID;
-                pointer->process();
+
+                if(pointer != nullptr) {
+                    pointer->process();
+                }
             }
         }
 
@@ -28,7 +32,22 @@ SystemManager::~SystemManager()
 
 }
 
+SystemManager *SystemManager::getInstance()
+{
+    auto instance = new SystemManager;
+    return instance;
+}
+
+int SystemManager::waitForFinished()
+{
+    if(m_thread.joinable()) {
+        m_thread.join();
+    }
+
+    return 0;
+}
+
 template<>
-ISystem::Type SystemManager::getType<ISystem>() const {
+ISystem::Type SystemManager::getType<InputSystem>() const {
     return 0;
 }

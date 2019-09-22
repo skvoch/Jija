@@ -3,18 +3,18 @@
 
 #include "ISystem.h"
 
+#include <boost/core/noncopyable.hpp>
+
 #include <unordered_map>
 #include <memory>
 #include <thread>
 #include <atomic>
 #include <mutex>
 
-class SystemManager
+class SystemManager : private boost::noncopyable
 {
 public:
-    SystemManager();
-   ~SystemManager();
-
+    static SystemManager* getInstance();
 
     template<typename T>
     ISystem::Type getType() const {
@@ -27,7 +27,7 @@ public:
         const auto typeID = getType<T>();
 
         if(!m_memory.count(typeID)) {
-            m_memory[typeID] = std::shared_ptr<T>();
+            m_memory[typeID] = std::make_shared<T>();
 
             return true;
         } else {
@@ -40,13 +40,17 @@ public:
         const auto typeID = getType<T>();
 
         if(m_memory.count(typeID)) {
-            return static_cast<T>(m_memory[typeID]);
+            return static_cast<T>(m_memory[typeID].second);
         } else {
             return nullptr;
         }
     }
 
+    int waitForFinished();
 private:
+    SystemManager();
+   ~SystemManager();
+
     std::mutex m_mutex;
     std::thread m_thread;
     std::atomic_bool m_stop;

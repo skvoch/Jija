@@ -8,8 +8,6 @@ IComponent::Type ComponentManager::getType<InputComponent>() {
 }
 
 
-
-
 ComponentManager *ComponentManager::getInstance()
 {
     static auto instance = new ComponentManager;

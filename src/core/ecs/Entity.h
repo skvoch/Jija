@@ -12,6 +12,7 @@ class Entity
 {
 public:
     using ID = std::size_t;
+    using Pointer = std::shared_ptr<Entity>;
     Entity(const ID id);
 
     template<typename T>

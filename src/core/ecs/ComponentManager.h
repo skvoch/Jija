@@ -26,6 +26,12 @@ public:
         return m_registerTable[getType<T>()];
     }
 
+    //todo args
+    template<typename T>
+    std::shared_ptr<T> createComponent() {
+        return std::make_shared<T>();
+    }
+
     void register_component(const IComponent::Type type, const std::size_t entityID);
 private:
     ComponentManager() = default;

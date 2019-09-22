@@ -1,7 +1,10 @@
 #ifndef COMPONENTMANAGER_H
 #define COMPONENTMANAGER_H
 
+#include "Components/InputComponent.h"
 #include "IComponent.h"
+
+#include <boost/core/noncopyable.hpp>
 
 #include <unordered_map>
 #include <iostream>
@@ -9,9 +12,8 @@
 #include <vector>
 #include <string>
 
-#include "Components/InputComponent.h"
 
-class ComponentManager
+class ComponentManager : private boost::noncopyable
 {
 public:
     static ComponentManager* getInstance();
@@ -34,10 +36,6 @@ public:
 
     void register_component(const IComponent::Type type, const std::size_t entityID);
 private:
-    ComponentManager() = default;
-    ComponentManager(const ComponentManager&) = delete;
-    ComponentManager& operator=( const ComponentManager&) = delete;
-
     std::unordered_map<InputComponent::Type, std::vector<std::size_t>> m_registerTable;
 };
 

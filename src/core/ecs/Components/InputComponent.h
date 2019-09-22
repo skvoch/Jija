@@ -3,10 +3,27 @@
 
 
 #include "../IComponent.h"
+#include "../Utils/Keys.h"
+
+#include <unordered_map>
+#include <set>
+
 class InputComponent : public IComponent
 {
 public:
-    int key = 228;
+
+    using Key = Utils::Keys::Type;
+    using KeyMap = std::unordered_map<Key, bool>;
+    using KeySetup = std::set<Key>;
+
+    void registerKey(const Key key);
+
+    const KeyMap& getKeyMap() const;
+    const KeySetup& getKeySetup() const;
+
+private:
+    KeySetup m_keySetup;
+    KeyMap m_keyMap;
 };
 
 #endif // INPUTCOMPONENT_H

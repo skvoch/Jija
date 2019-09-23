@@ -22,7 +22,8 @@ SOURCES += \
     src/core/ecs/ISystem.cpp \
     src/core/ecs/SystemManager.cpp \
     src/core/ecs/Systems/InputSystem.cpp \
-    src/core/ecs/Utils/Keys.cpp
+    src/core/ecs/Utils/Keys.cpp \
+    src/core/ecs/Systems/RenderSystem.cpp
 
 HEADERS += \
     src/core/ecs/Entity.h \
@@ -33,4 +34,5 @@ HEADERS += \
     src/core/ecs/ISystem.h \
     src/core/ecs/SystemManager.h \
     src/core/ecs/Systems/InputSystem.h \
-    src/core/ecs/Utils/Keys.h
+    src/core/ecs/Utils/Keys.h \
+    src/core/ecs/Systems/RenderSystem.h

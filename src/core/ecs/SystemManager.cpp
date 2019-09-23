@@ -1,5 +1,6 @@
 #include "SystemManager.h"
 #include "Systems/InputSystem.h"
+#include "Systems/RenderSystem.h"
 
 SystemManager::SystemManager()
     : m_stop(false)
@@ -50,4 +51,9 @@ int SystemManager::waitForFinished()
 template<>
 ISystem::Type SystemManager::getType<InputSystem>() const {
     return 0;
+}
+
+template<>
+ISystem::Type SystemManager::getType<RenderSystem>() const {
+    return 1;
 }

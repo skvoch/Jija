@@ -4,14 +4,18 @@
 #include "core/ecs/Entity.h"
 
 #include "core/ecs/Systems/InputSystem.h"
+#include "core/ecs/Systems/RenderSystem.h"
 
-int main()
+
+int main(int argc, char** argv)
 {
     auto entityManager = EntityManager::getInstance();
     auto componentManager = ComponentManager::getInstance();
     auto systemManager = SystemManager::getInstance();
 
     systemManager->addSystem<InputSystem>();
+    systemManager->addSystem<RenderSystem>();
+
 
     auto player = entityManager->createEntity();
     player->addComponent(componentManager->createComponent<InputComponent>());

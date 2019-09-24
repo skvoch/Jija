@@ -9,7 +9,7 @@ LIBS += -lpthread \
        -lX11 \
        -lGL \
        -lGLU \
-       -lglut \
+       -lglfw \
        -lgainput
 
 SOURCES += \

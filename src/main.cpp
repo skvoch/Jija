@@ -9,9 +9,6 @@
 
 int main(int argc, char** argv)
 {
-
-    glutInit(&argc, argv);
-
     auto entityManager = EntityManager::getInstance();
     auto componentManager = ComponentManager::getInstance();
     auto systemManager = SystemManager::getInstance();
